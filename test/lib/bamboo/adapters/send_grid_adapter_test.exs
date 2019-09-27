@@ -85,11 +85,11 @@ defmodule Bamboo.SendGridAdapterTest do
   test "raises if an invalid ENV var is used for the API key" do
     System.delete_env("SENDGRID_API")
 
-    assert_raise ArgumentError, ~r/no API key set/, fn ->
+    assert_raise ArgumentError, ~r/could not fetch environment variable \"SENDGRID_API\" because it is not set/, fn ->
       new_email(from: "foo@bar.com") |> SendGridAdapter.deliver(@config_with_env_var_key)
     end
 
-    assert_raise ArgumentError, ~r/no API key set/, fn ->
+    assert_raise ArgumentError, ~r/could not fetch environment variable \"SENDGRID_API\" because it is not set/, fn ->
       SendGridAdapter.handle_config(@config_with_env_var_key)
     end
   end
